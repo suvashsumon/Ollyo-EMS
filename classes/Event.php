@@ -55,7 +55,7 @@ class Event {
         $stmt->execute(['event_id' => $event_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+  
     public function updateEvent($id, $name, $description, $date, $location, $capacity) {
         $sql = "UPDATE events SET name = :name, description = :description, date = :date, location = :location, capacity = :capacity WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
