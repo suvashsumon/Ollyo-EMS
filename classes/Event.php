@@ -56,6 +56,19 @@ class Event {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updateEvent($id, $name, $description, $date, $location, $capacity) {
+        $sql = "UPDATE events SET name = :name, description = :description, date = :date, location = :location, capacity = :capacity WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            'id' => $id,
+            'name' => $name,
+            'description' => $description,
+            'date' => $date,
+            'location' => $location,
+            'capacity' => $capacity
+        ]);
+    }
+
     public function deleteEvent($id) {
         $sql = "DELETE FROM events WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
