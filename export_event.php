@@ -36,7 +36,7 @@ try {
     header('Content-Disposition: attachment; filename="event_' . $event_id . '_registrations.csv"');
     
     $output = fopen('php://output', 'w');
-    fputcsv($output, ['User ID', 'Name', 'Email']);
+    fputcsv($output, ['Name', 'Email']);
 
     foreach ($eventRegistrations as $row) {
         fputcsv($output, $row);
