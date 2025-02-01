@@ -3,7 +3,7 @@ FROM php:8.0-apache
 
 # Install required dependencies and enable PHP extensions for MySQL and PDO
 RUN apt-get update && apt-get install -y \
-    libpdo-mysql \
+    libpng-dev libjpeg-dev libfreetype6-dev \
     && docker-php-ext-install pdo_mysql \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
