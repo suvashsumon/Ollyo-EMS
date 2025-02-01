@@ -23,8 +23,10 @@ class Event {
         ]);
     }
 
-    public function getEvents($user_id = null) {
-        if ($user_id) {
+    public function getEvents($user=null) {
+        $user_id = $user ? $user['id'] : null;
+        $user_role = $user ? $user['role'] : null;
+        if ($user_id && $user_role === 'user') {
             $sql = "SELECT events.*,
                            (events.capacity - IFNULL(COUNT(event_registrations.id), 0)) AS remaining_capacity
                     FROM events
@@ -101,5 +103,17 @@ class Event {
         $sql = "UPDATE events SET registered = registered + 1 WHERE id = :event_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute(['event_id' => $event_id]);
+    }
+
+    public function getRegisteredUsers($event_id=null) {
+        if($event_id==null) {
+            return [];
+        }
+
+        $sql = "SELECT guest_name, guest_email FROM event_registrations
+                WHERE event_registrations.event_id = :event_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['event_id' => $event_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

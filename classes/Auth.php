@@ -53,7 +53,7 @@ class Auth {
     }
 
     public function getUserById($userId) {
-        $stmt = $this->conn->prepare("SELECT id, name, email FROM users WHERE id = ?");
+        $stmt = $this->conn->prepare("SELECT id, name, email, role FROM users WHERE id = ?");
         $stmt->execute([$userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
