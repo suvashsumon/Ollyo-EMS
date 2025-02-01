@@ -5,7 +5,7 @@ class Database {
     private $conn;
 
     public function connect() {
-        EnvLoader::load();
+        // EnvLoader::load();
 
         $host = getenv('DB_HOST');
         $port = getenv('DB_PORT');
