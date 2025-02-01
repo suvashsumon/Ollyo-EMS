@@ -26,6 +26,10 @@ if (isset($_GET['event_id']) && is_numeric($_GET['event_id'])) {
 </head>
 <body>
 
+<?php
+include_once './common/navbar.php';
+?>
+
 <div class="container mt-5">
     <h2 class="mb-4">Register for Event</h2>
 

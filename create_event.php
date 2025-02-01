@@ -50,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+<?php
+include_once './common/navbar.php';
+?>
+
+
 <div class="container mt-5">
     <h2>Create New Event</h2>
 

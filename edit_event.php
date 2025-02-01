@@ -54,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
+<?php
+include_once './common/navbar.php';
+?>
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
         <h2>Edit Event</h2>

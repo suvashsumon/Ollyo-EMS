@@ -28,10 +28,13 @@ $events = $event->getEvents($user);
 </head>
 <body>
 
+<?php
+include_once './common/navbar.php';
+?>
+
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
         <h2>Welcome, <?php echo htmlspecialchars($user['name']); ?>!</h2>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
 
     <h3 class="mt-4">Manage Events</h3>
