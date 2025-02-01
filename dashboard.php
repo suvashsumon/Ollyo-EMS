@@ -55,9 +55,10 @@ $events = $event->getEvents($user);
                     <td><?php echo htmlspecialchars($event['description']); ?></td>
                     <td><?php echo htmlspecialchars($event['date']); ?></td>
                     <td>
+                        <a href="view_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-info btn-sm">View</a>
                         <a href="edit_event.php?id=<?php echo $event['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
                         <?php if ($user['role'] === 'admin'): ?>
-                            <a href="export_event.php?id=<?php echo $event['id']; ?>" class="btn btn-info btn-sm">Export</a>
+                            <a href="export_event.php?id=<?php echo $event['id']; ?>" class="btn btn-warning btn-sm">Export</a>
                         <?php endif; ?>
                         <a href="delete_event.php?id=<?php echo $event['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                     </td>

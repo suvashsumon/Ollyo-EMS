@@ -62,10 +62,10 @@ $events = $eventObj->getEvents();
                         <td><?php echo htmlspecialchars($event['location']); ?></td>
                         <td><?php echo htmlspecialchars($event['remaining_capacity']); ?></td>
                         <td>
+                            <a href="view_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-primary btn-sm">View</a>
+                            <!-- Disable register button if remaining capacity is 0 -->
                             <?php if ($event['remaining_capacity'] > 0): ?>
                                 <a href="register_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-success btn-sm">Register</a>
-                            <?php else: ?>
-                                <button class="btn btn-secondary btn-sm" disabled>Full</button>
                             <?php endif; ?>
                         </td>
                     </tr>
