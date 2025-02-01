@@ -14,9 +14,7 @@ if (!$auth->isLoggedIn()) {
 }
 
 $user = $auth->getUserById($_SESSION['user_id']);
-
 $events = $event->getEvents($user);
-
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +24,7 @@ $events = $event->getEvents($user);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard - Event Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -38,7 +37,7 @@ $events = $event->getEvents($user);
     <h3 class="mt-4">Manage Events</h3>
     <a href="create_event.php" class="btn btn-success mb-3">Create New Event</a>
 
-    <table class="table table-bordered">
+    <table id="eventsTable" class="table table-bordered">
         <thead>
             <tr>
                 <th>#</th>
@@ -68,6 +67,12 @@ $events = $event->getEvents($user);
     </table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#eventsTable').DataTable();
+    });
+</script>
 </body>
 </html>
