@@ -12,6 +12,7 @@ Link : https://ollyo-ems.onrender.com
 - Email : user@user.com
 - pass : 123456789
 ```
+API endpoint : `http://localhost/Ollyo-EMS/api/event_details.php?event_id=eventid`
 
 ## Setup Guide
 This applicaton already hosted on ***Render***. But in case of local setup, follow the follwing guidelines:
