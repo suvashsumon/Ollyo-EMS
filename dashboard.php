@@ -15,7 +15,7 @@ if (!$auth->isLoggedIn()) {
 
 $user = $auth->getUserById($_SESSION['user_id']);
 
-$events = $event->getEvents($user['id']);
+$events = $event->getEvents($user);
 
 ?>
 
@@ -57,6 +57,9 @@ $events = $event->getEvents($user['id']);
                     <td><?php echo htmlspecialchars($event['date']); ?></td>
                     <td>
                         <a href="edit_event.php?id=<?php echo $event['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                        <?php if ($user['role'] === 'admin'): ?>
+                            <a href="export_event.php?id=<?php echo $event['id']; ?>" class="btn btn-info btn-sm">Export</a>
+                        <?php endif; ?>
                         <a href="delete_event.php?id=<?php echo $event['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                     </td>
                 </tr>
