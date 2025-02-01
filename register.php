@@ -5,6 +5,11 @@ require_once 'classes/Auth.php';
 session_start();
 
 $auth = new Auth();
+if($auth->isLoggedIn()) {
+    header("Location: dashboard.php");
+    exit;
+}
+
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

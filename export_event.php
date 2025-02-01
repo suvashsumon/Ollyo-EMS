@@ -33,7 +33,7 @@ try {
 
     // Prepare CSV file
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="event_' . $event_id . '_registrations.csv"');
+    header('Content-Disposition: attachment; filename="event_' . $eventDetails['name'] . '_registrations.csv"');
     
     $output = fopen('php://output', 'w');
     fputcsv($output, ['Name', 'Email']);
