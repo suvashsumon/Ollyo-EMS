@@ -11,9 +11,8 @@ class TableCreator {
 
     public function createTables() {
         $sql = "
-        ALTER TABLE event_registrations ADD CONSTRAINT unique_guest_email UNIQUE (guest_email);
-
-        UPDATE users SET role = 'admin' WHERE email = 'admin@admin.com';
+        ALTER TABLE event_registrations 
+        ADD CONSTRAINT unique_event_registration UNIQUE (event_id, guest_email);
         ";
 
         try {
