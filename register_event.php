@@ -90,7 +90,7 @@ include_once './common/navbar.php';
         </div>
     </div>
 
-    <a href="dashboard.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    <a href="index.php" class="btn btn-secondary mt-3">Back to Dashboard</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -113,7 +113,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                $("#response-message").html('<div class="alert alert-danger">Something went wrong!</div>');
+                $("#response-message").html('<div class="alert alert-danger">Something went wrong or you may already registred!</div>');
             }
         });
     });

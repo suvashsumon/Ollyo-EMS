@@ -80,12 +80,13 @@ class Event {
     public function registerForEvent($event_id, $user_id, $guest_name = null, $guest_email = null) {
         $event_details = $this->getEventById($event_id);
         if ($event_details['registered'] < $event_details['capacity']) {
-            if ($user_id) {
-                $sql = "INSERT INTO event_registrations (event_id, user_id) VALUES (:event_id, :user_id)";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute(['event_id' => $event_id, 'user_id' => $user_id]);
-            }
-            elseif ($guest_name && $guest_email) {
+            // if ($user_id) {
+            //     $sql = "INSERT INTO event_registrations (event_id, user_id) VALUES (:event_id, :user_id)";
+            //     $stmt = $this->conn->prepare($sql);
+            //     $stmt->execute(['event_id' => $event_id, 'user_id' => $user_id]);
+            // }
+            // else
+            if ($guest_name && $guest_email) {
                 $sql = "INSERT INTO event_registrations (event_id, guest_name, guest_email) VALUES (:event_id, :guest_name, :guest_email)";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(['event_id' => $event_id, 'guest_name' => $guest_name, 'guest_email' => $guest_email]);
