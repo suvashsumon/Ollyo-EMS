@@ -41,7 +41,7 @@ include_once './common/navbar.php';
                     <tr>
                         <td><?php echo htmlspecialchars($event['name']); ?></td>
                         <td><?php echo htmlspecialchars($event['description']); ?></td>
-                        <td><?php echo date("F j, Y", strtotime($event['date'])); ?></td>
+                        <td><?php echo date("F j, Y h:i A", strtotime($event['date'])); ?></td>
                         <td><?php echo htmlspecialchars($event['location']); ?></td>
                         <td><?php echo htmlspecialchars($event['remaining_capacity']); ?></td>
                         <td>
