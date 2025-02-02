@@ -36,27 +36,33 @@ include_once './common/navbar.php';
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($events)): ?>
-                <?php foreach ($events as $event): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($event['name']); ?></td>
-                        <td><?php echo htmlspecialchars($event['description']); ?></td>
-                        <td><?php echo date("F j, Y", strtotime($event['date'])); ?></td>
-                        <td><?php echo htmlspecialchars($event['location']); ?></td>
-                        <td><?php echo htmlspecialchars($event['remaining_capacity']); ?></td>
-                        <td>
-                            <a href="view_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-primary btn-sm">View</a>
-                            <!-- Disable register button if remaining capacity is 0 -->
-                            <?php if ($event['remaining_capacity'] > 0): ?>
-                                <a href="register_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-success btn-sm">Register</a>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr><td colspan="6" class="text-center">No events found.</td></tr>
-            <?php endif; ?>
-        </tbody>
+    <?php
+    $current_time = date("Y-m-d H:i:s"); // Get current datetime
+    $future_events = array_filter($events, function($event) use ($current_time) {
+        return strtotime($event['date']) >= strtotime($current_time);
+    });
+
+    if (!empty($future_events)): 
+        foreach ($future_events as $event): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($event['name']); ?></td>
+                <td><?php echo htmlspecialchars($event['description']); ?></td>
+                <td><?php echo date("F j, Y h:i A", strtotime($event['date'])); ?></td>
+                <td><?php echo htmlspecialchars($event['location']); ?></td>
+                <td><?php echo htmlspecialchars($event['remaining_capacity']); ?></td>
+                <td>
+                    <a href="view_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-primary btn-sm">View</a>
+                    <?php if ($event['remaining_capacity'] > 0): ?>
+                        <a href="register_event.php?event_id=<?php echo $event['id']; ?>" class="btn btn-success btn-sm">Register</a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; 
+    else: ?>
+        <tr><td colspan="6" class="text-center">No upcoming events.</td></tr>
+    <?php endif; ?>
+</tbody>
+
     </table>
 </div>
 
