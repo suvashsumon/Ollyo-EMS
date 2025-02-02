@@ -10,6 +10,10 @@ $event_details = null; // Initialize the variable
 if (isset($_GET['event_id']) && is_numeric($_GET['event_id'])) {
     $event_id = $_GET['event_id'];
     $event_details = $event->getEventById($event_id);
+    if (strtotime($event_details['date']) <= time()) {
+        header('Location: index.php');
+        exit();
+    }
 } else {
     die(json_encode(["error" => "Invalid event ID."]));
 }

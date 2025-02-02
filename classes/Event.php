@@ -116,4 +116,18 @@ class Event {
         $stmt->execute(['event_id' => $event_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function isPastEvent($event_id) {
+        $sql = "SELECT date FROM events WHERE id = :event_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['event_id' => $event_id]);
+        $event = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($event) {
+            return strtotime($event['date']) < time();
+        }
+    
+        return false;
+    }
+    
 }
