@@ -19,18 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
     $description = isset($_POST['description']) ? trim($_POST['description']) : '';
     $date = isset($_POST['date']) ? trim($_POST['date']) : '';
+    $time = isset($_POST['time']) ? trim($_POST['time']) : '';
     $location = isset($_POST['location']) ? trim($_POST['location']) : '';
     $capacity = isset($_POST['capacity']) ? (int)$_POST['capacity'] : 0;
 
-    if (empty($name) || empty($description) || empty($date) || empty($location) || empty($capacity)) {
+    if (empty($name) || empty($description) || empty($date) || empty($time) || empty($location) || empty($capacity)) {
         $error_message = "Please fill in all fields.";
     } else {
-        $currentDate = date('Y-m-d');
-        if ($date < $currentDate) {
+        $currentDateTime = date('Y-m-d H:i');
+        $eventDateTime = "$date $time";
+        if ($eventDateTime < $currentDateTime) {
             $error_message = "Event date cannot be in the past.";
         } else {
             $created_by = $auth->getUserId();
-            if ($event->createEvent($name, $description, $date, $location, $capacity, $created_by)) {
+            if ($event->createEvent($name, $description, $eventDateTime, $location, $capacity, $created_by)) {
                 $success_message = "Event created successfully!";
             } else {
                 $error_message = "Failed to create the event. Please try again.";
@@ -87,6 +89,12 @@ include_once './common/navbar.php';
             <label for="date" class="form-label">Event Date</label>
             <input type="date" class="form-control" id="date" name="date" required>
         </div>
+
+        <div class="mb-3">
+            <label for="time" class="form-label">Event Time</label>
+            <input type="time" class="form-control" id="time" name="time" required>
+        </div>
+
 
         <div class="mb-3">
             <label for="location" class="form-label">Event Location</label>
