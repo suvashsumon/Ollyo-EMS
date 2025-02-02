@@ -14,6 +14,9 @@ Link : https://ollyo-ems.onrender.com
 ```
 API endpoint : `http://localhost/Ollyo-EMS/api/event_details.php?event_id=eventid`
 
+## Database Diagram
+![database](database_er.png)
+
 ## Setup Guide
 This applicaton already hosted on ***Render***. But in case of local setup, follow the follwing guidelines:
 1. To develop this project following technologies are used:
