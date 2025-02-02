@@ -23,13 +23,14 @@ class Auth {
     }
 
     public function login($email, $password) {
-        $stmt = $this->conn->prepare("SELECT id, name, password FROM users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT id, name, role, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
+            $_SESSION['role'] = $user['role'];
             return true;
         }
         return false;
