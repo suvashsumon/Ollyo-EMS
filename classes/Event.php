@@ -129,5 +129,24 @@ class Event {
     
         return false;
     }
+
+    public function searchEvents($query) {
+        $sql = "SELECT events.*,
+                       (events.capacity - IFNULL(COUNT(event_registrations.id), 0)) AS remaining_capacity 
+                FROM events 
+                LEFT JOIN event_registrations ON events.id = event_registrations.event_id
+                WHERE events.name LIKE :query
+                   OR events.description LIKE :query
+                   OR events.location LIKE :query
+                   OR DATE(events.date) LIKE :query
+                GROUP BY events.id
+                ORDER BY events.date ASC";
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['query' => "%$query%"]);
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     
 }
